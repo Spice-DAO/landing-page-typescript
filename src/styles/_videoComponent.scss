@@ -1,0 +1,19 @@
+.VideoComponent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.VideoTextContainer{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    background-color: #272435;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+     -ms-user-select: none;
+         user-select: none;
+  }
