@@ -1,0 +1,73 @@
+.HeaderText{
+    display: flex;
+    font-size: 64px;
+    font-weight: 700;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .EpisodeTitle{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 28px;
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 0.7rem;
+  
+  }
+  
+  .LocationTitle{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 3rem;
+  
+  }
+  
+  
+  .Credits{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 22px;
+    font-weight: 500;
+  }
+  
+  .SmallHeader{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-size: 46px;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+  
+  .TinyHeader{
+    font-size: 28px;
+    font-weight: 500;
+  }
+  
+  .BiblePageContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    font-size: 22px;
+  }
+  
+  
+  .BibleTextContainer{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    background-color: #272435;
+    border-radius: 1rem;
+    padding: 2rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+     -ms-user-select: none;
+         user-select: none;
+  }
+  
+  

@@ -65,47 +65,47 @@ p {
   text-align: left;
 }
 
-.Home {
+.HomeComponent {
   width: 50%;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 @media only screen and (max-width: 48em) {
-  .Home {
+  .HomeComponent {
     width: 100%;
     padding: 2.5rem;
   }
 }
-.Home__logo {
+.HomeComponent__logo {
   width: 18rem;
   margin: 2rem auto;
   transition: all 0.3s ease-in-out;
 }
 @media only screen and (max-width: 48em) {
-  .Home__logo {
+  .HomeComponent__logo {
     width: 9rem;
   }
 }
 @media only screen and (max-width: 37.5em) {
-  .Home__logo {
+  .HomeComponent__logo {
     width: 7rem;
   }
 }
-.Home__text {
+.HomeComponent__text {
   margin-left: 0rem;
   margin-right: 0rem;
 }
-.Home__links {
+.HomeComponent__links {
   display: flex;
   justify-content: space-between;
 }
 @media only screen and (max-width: 37.5em) {
-  .Home__links {
+  .HomeComponent__links {
     flex-direction: column;
   }
 }
-.Home__links > * {
+.HomeComponent__links > * {
   background-color: #fff;
   border-radius: 10px;
   padding: 0.3rem;
@@ -117,29 +117,116 @@ p {
   transition: all 0.3s ease-in-out;
 }
 @media only screen and (max-width: 37.5em) {
-  .Home__links > * {
+  .HomeComponent__links > * {
     flex-direction: column;
     width: 100%;
   }
 }
-.Home__links > *:hover {
+.HomeComponent__links > *:hover {
   background-color: transparent;
   border-color: #fff;
   color: #fff;
 }
-.Home__social_icons {
+.HomeComponent__social_icons {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
 }
-.Home__social_icons > * {
+.HomeComponent__social_icons > * {
   margin: 0.7rem;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   font-size: 1.4rem;
   color: #fff;
 }
-.Home__social_icons > *:hover {
+.HomeComponent__social_icons > *:hover {
   transform: scale(1.3);
   color: rgb(34, 129, 131);
+}
+
+.AsteriskContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.AsteriskSpacer {
+  display: flex;
+  width: 20%;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.AsteriskText {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.HeaderText {
+  display: flex;
+  font-size: 64px;
+  font-weight: 700;
+  width: 100%;
+  justify-content: center;
+}
+
+.EpisodeTitle {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 28px;
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 0.7rem;
+}
+
+.LocationTitle {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.Credits {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.SmallHeader {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: 46px;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.TinyHeader {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.BiblePageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  font-size: 22px;
+}
+
+.BibleTextContainer {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  background-color: #272435;
+  border-radius: 1rem;
+  padding: 2rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }/*# sourceMappingURL=styles.css.map */
