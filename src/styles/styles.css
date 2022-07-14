@@ -1,0 +1,145 @@
+/*
+0 - 600px:      Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+[1200 - 1800] is where our normal styles apply
+1800px + :      Big desktop
+
+$breakpoint arguement choices:
+- phone
+- tab-port
+- big-desktop
+
+ORDER: Base + typography > general layout + grid > page layout > components
+
+1em = 16px
+*/
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;600;700&display=swap");
+a,
+button {
+  text-decoration: none;
+  background: none;
+  text-align: center;
+}
+
+* {
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(180deg, rgb(34, 129, 131) 9%, rgb(245, 221, 183) 92%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  color: #fff;
+  font-weight: lighter;
+  line-height: 1.5;
+}
+
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+@media (max-height: 600px) {
+  .App {
+    height: auto;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .App {
+    min-height: 100vh;
+  }
+}
+
+img {
+  width: 100%;
+}
+
+p {
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.Home {
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+@media only screen and (max-width: 48em) {
+  .Home {
+    width: 100%;
+    padding: 2.5rem;
+  }
+}
+.Home__logo {
+  width: 18rem;
+  margin: 2rem auto;
+  transition: all 0.3s ease-in-out;
+}
+@media only screen and (max-width: 48em) {
+  .Home__logo {
+    width: 9rem;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .Home__logo {
+    width: 7rem;
+  }
+}
+.Home__text {
+  margin-left: 0rem;
+  margin-right: 0rem;
+}
+.Home__links {
+  display: flex;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 37.5em) {
+  .Home__links {
+    flex-direction: column;
+  }
+}
+.Home__links > * {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 0.3rem;
+  color: rgb(34, 129, 131);
+  width: 27%;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  border: 1px solid #fff;
+  transition: all 0.3s ease-in-out;
+}
+@media only screen and (max-width: 37.5em) {
+  .Home__links > * {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+.Home__links > *:hover {
+  background-color: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+.Home__social_icons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.Home__social_icons > * {
+  margin: 0.7rem;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  font-size: 1.4rem;
+  color: #fff;
+}
+.Home__social_icons > *:hover {
+  transform: scale(1.3);
+  color: rgb(34, 129, 131);
+}/*# sourceMappingURL=styles.css.map */
