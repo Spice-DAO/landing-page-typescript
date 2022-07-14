@@ -2,8 +2,7 @@ import logo from '../../components/assets/images/logo2.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faDiscord, faMedium } from '@fortawesome/free-brands-svg-icons'
-//import {}
-
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home(){
     return(
@@ -38,7 +37,7 @@ export default function Home(){
             <a href="https://twitter.com/TheSpiceDao"> {<FontAwesomeIcon icon={faTwitter} />} </a>
             <a href="http://discord.gg/SPICEDAO">{<FontAwesomeIcon icon={faDiscord} />}</a>
             <a href="https://medium.com/@SpiceDao">{<FontAwesomeIcon icon={faMedium} />}</a>
-            {/* <a href="mailto:team@spicedao.xyz">< FaEnvelope /></a> */}
+            <a href="mailto:team@spicedao.xyz">{<FontAwesomeIcon icon={faEnvelope} />}</a>
           </div>
         </div>
     )
