@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import React, { useEffect } from "react";
 import TashkaVid from '../assets/video/tashka.mp4';
 import DuneVid from '../assets/video/dune_bible_video.mp4';
@@ -11,8 +10,6 @@ type Props ={
 
 
 export default function VideoComponent({duneFlag, tashkaFlag}: Props) {
-
-  //RE-ENABLE BEFORE LAUNCH
 
   useEffect(() => {
     document.addEventListener('contextmenu', (e) => {

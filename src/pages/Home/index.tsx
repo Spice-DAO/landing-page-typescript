@@ -2,6 +2,7 @@
 import Dolkoroth from '../../components/Dolkoroth';
 import HomeComponent from '../../components/HomeComponent';
 import VideoComponent from "../../components/VideoComponent";
+import Redemptions from "../../components/Redemptions";
 
 type Props = {
   walletAndSpice: boolean;
@@ -27,9 +28,9 @@ export default function Home({walletAndSpice, dolkorothFlag, duneFlag, tashkaFla
         duneFlag={duneFlag}
          tashkaFlag={tashkaFlag} />)
     }
-    // else if (walletAndSpice && redemptionFlag) {
-    //   return (<Redemptions />)
-    // }
+    else if (walletAndSpice && redemptionFlag) {
+      return (<Redemptions />)
+    }
     else {
       return (<HomeComponent />)
     }
