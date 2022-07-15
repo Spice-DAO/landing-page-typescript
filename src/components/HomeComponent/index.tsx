@@ -29,6 +29,8 @@ export default function HomeComponent({ setSpiceFound, setDolkorothFlag, setDune
   const [tashkaReg, setTashkaReg] = useState("Tashka")
   const [tashkaMsg, setTashkaMsg] = useState(tashkaReg);
 
+  const [redemptionReg, setRedemptionReg] = useState("Redemptions")
+  const [redemptionMsg, setRedemptionMsg] = useState(redemptionReg);
 
   const { address, isConnected } = useAccount()
 
@@ -126,7 +128,19 @@ export default function HomeComponent({ setSpiceFound, setDolkorothFlag, setDune
       <div className='HomeComponent__links'>
         <a href="https://forum.spicedao.xyz/">Forum</a>
         <a href="https://snapshot.org/#/dunedao.eth">Governance</a>
-        <a href="https://snapshot.org/#/dunedao.eth">Governance</a>
+
+        {isConnected ? (
+          <a
+            onMouseEnter={() => setRedemptionMsg(getAltMsg("Redeem"))}
+            onMouseLeave={() => setRedemptionMsg(redemptionReg)}
+            onClick={() => handleFlag(setRedemptionFlag)}
+          >{redemptionMsg}</a>
+        ) : (<a
+          onMouseEnter={() => setRedemptionMsg(getAltMsg("Redeem"))}
+          onMouseLeave={() => setRedemptionMsg(redemptionReg)}
+          onClick={() => connect()}
+        >{redemptionMsg}</a>
+        )}
       </div>
 
 
