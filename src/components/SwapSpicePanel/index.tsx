@@ -1,5 +1,8 @@
 import { useState } from "react"
 import { useForm, SubmitHandler, FormProvider, } from "react-hook-form";
+import { useContractWrite, useAccount, useWaitForTransaction } from 'wagmi'
+import ERC20 from "../assets/ABI/ERC20ABI.json";
+
 
 type FormData = {
     ethCountInput: number;
@@ -12,10 +15,63 @@ export default function SwapSpicePanel() {
     const { register, getValues, setValue, handleSubmit, formState: { errors } } = useForm<FormData>();
     const onSubmit = handleSubmit(data => submitData());
 
+    const { address, isConnected } = useAccount()
 
     const [ethCount, setEthCount] = useState(0.3);
     const [spiceCount, setSpiceCount] = useState(1000000);
-    const [msg, setMsg] = useState("Redeem");
+    const [msg, setMsg] = useState("Approve");
+    const [approved, setApproved] = useState(false);
+    const [approvalHash, setApprovalHash] = useState("");
+    const [redeemHash, setRedeemHash] = useState("");
+
+
+
+    
+
+    //Just use the token Address and call it's approve function and pass in the args
+    //Standard ERC-20 ABI
+    //Args: Spender, Amount
+
+    // const approveTxn = useContractWrite({
+    //     addressOrName: '0xecb504d39723b0be0e3a9aa33d646642d1051ee1',
+    //     contractInterface: ERC20,
+    //     functionName: 'approve',
+    //     args: [address, spiceCount],
+    //     onSettled(data, error) {
+    //       if(data !== undefined){
+    //       setApprovalHash(data?.hash);
+    //     }
+    //       if(error !== undefined){
+    //         setMsg("ERROR Try again!");
+    //       }
+    //       console.log('Settled', { data, error })
+    //     },
+    //   })
+
+
+    //   const approvalWait = useWaitForTransaction({
+    //     hash: approvalHash,
+    //   })
+
+
+    //Contract Address and ABI
+    //Args: Amount (Just grab from the other txn)
+
+    // const redeemTxn = useContractWrite({
+    //     addressOrName: '0xecb504d39723b0be0e3a9aa33d646642d1051ee1',
+    //     contractInterface: wagmigotchiABI,
+    //     functionName: 'redeem',
+    //     args:[spiceCount],
+    //     onSettled(data, error) {
+    //       console.log('Settled', { data, error })
+    //     },
+    //   })
+
+    
+    //   const redeemWait = useWaitForTransaction({
+    //     hash: redeemHash,
+    //   })
+
 
     function parseData() {
         var newEthCount;
@@ -39,7 +95,7 @@ export default function SwapSpicePanel() {
     }
 
     function submitData() {
-        setMsg("Redeem");
+        setMsg("Approve");
 
         // console.log("GETTING VALUES");
         // console.log(getValues("ethCountInput"));
@@ -54,6 +110,8 @@ export default function SwapSpicePanel() {
             setMsg("Must Redeem More Than 0 Spice")
         }
         else {
+
+            setMsg("Sending Transaction")
             console.log("Hit!");
         }
 
@@ -71,7 +129,7 @@ export default function SwapSpicePanel() {
             <div>Swap</div>
 
             <input style={{ marginBottom: "1.5rem" }} disabled defaultValue={ethCount}  {...register("ethCountInput")} />
-            <input style={{ marginBottom: "1.5rem" }} defaultValue={spiceCount} {...register("spiceCountInput")} />
+            <input style={{ marginBottom: "1.5rem" }} defaultValue={spiceCount} disabled={approved} {...register("spiceCountInput")} />
 
             <div>Information Panel</div>
             <button type="submit">{msg}</button>
