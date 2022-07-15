@@ -7,7 +7,6 @@ export default function Redemptions() {
             <div className='HeaderText' style={{marginBottom: "4rem"}}>
                 SPICE REDEMPTIONS
             </div>
-            
             <SwapSpicePanel/>
         </div>
     )

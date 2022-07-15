@@ -12,9 +12,10 @@ const client = createClient({
 
 
 function App() {
-  const [walletAndSpice, setWalletAndSpice] = useState(true);
+  const [connected, setConnected] = useState(false);
+  const [spiceFound, setSpiceFound] = useState(false);
   const [dolkorothFlag, setDolkorothFlag] = useState(false);
-  const [duneFlag,  setDuneFlag] = useState(true);
+  const [duneFlag,  setDuneFlag] = useState(false);
   const [tashkaFlag, setTashkaFlag] = useState(false);
   const [redemptionFlag, setRedemptionFlag] = useState(false);
 
@@ -22,11 +23,19 @@ function App() {
   return (
     <WagmiConfig client={client}>
       <div className='App'>
-      <Home walletAndSpice={walletAndSpice}
+      <Home 
+      connected={connected}
+      spiceFound={spiceFound}
       dolkorothFlag={dolkorothFlag}
       duneFlag={duneFlag}
       tashkaFlag={tashkaFlag}
-      redemptionFlag={redemptionFlag} />
+      redemptionFlag={redemptionFlag}
+      setConnected={setConnected}
+      setSpiceFound={setSpiceFound}
+      setDolkorothFlag={setDolkorothFlag}
+      setDuneFlag={setDuneFlag}
+      setTashkaFlag={setTashkaFlag}
+      setRedemptionFlag={setRedemptionFlag} />
       </div>
     </WagmiConfig>
 
