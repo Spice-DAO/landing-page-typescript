@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useForm, SubmitHandler, FormProvider, } from "react-hook-form";
 import { useContractWrite, useAccount, useWaitForTransaction } from 'wagmi'
 import ERC20 from "../assets/ABI/ERC20ABI.json";
+import ethIcon from "../assets/images/eth.svg";
 
 
 type FormData = {
@@ -26,7 +27,7 @@ export default function SwapSpicePanel() {
 
 
 
-    
+
 
     //Just use the token Address and call it's approve function and pass in the args
     //Standard ERC-20 ABI
@@ -67,7 +68,7 @@ export default function SwapSpicePanel() {
     //     },
     //   })
 
-    
+
     //   const redeemWait = useWaitForTransaction({
     //     hash: redeemHash,
     //   })
@@ -77,8 +78,8 @@ export default function SwapSpicePanel() {
         var newEthCount;
 
         if (isNaN(Number(getValues("spiceCountInput"))) ||
-             !Number.isInteger(Number(getValues("spiceCountInput"))) ||
-             (String(getValues("spiceCountInput"))[getValues.length] === ".")) {
+            !Number.isInteger(Number(getValues("spiceCountInput"))) ||
+            (String(getValues("spiceCountInput"))[getValues.length] === ".")) {
             setValue("spiceCountInput", spiceCount);
         }
 
@@ -105,8 +106,8 @@ export default function SwapSpicePanel() {
         // console.log(spiceCount);
         if (String(spiceCount).length > 8) {
             setMsg("Too Much Spice!")
-        } 
-        if(spiceCount == 0){
+        }
+        if (spiceCount == 0) {
             setMsg("Must Redeem More Than 0 Spice")
         }
         else {
@@ -126,15 +127,26 @@ export default function SwapSpicePanel() {
 
     return (
         <form className="SwapSpicePanel" onSubmit={onSubmit} onChange={parseData}>
-            <div style={{fontWeight: "600"}}>Swap</div>
+            <div style={{ fontWeight: "600" }}>Swap</div>
 
             <div className="InputBlock" >
-            <input disabled defaultValue={ethCount}  {...register("ethCountInput")} />
+                <input disabled defaultValue={ethCount}  {...register("ethCountInput")} />
+                <div className="CurrencyBlob">
+                    <img style={{ width: "1.5rem" }} src={ethIcon} />
+                    <div>ETH</div>
+                </div>
+
             </div>
             <div className="InputBlock">
-            <input style={{backgroundColor: "transparent"}} defaultValue={spiceCount} disabled={approved} {...register("spiceCountInput")} />
+                <input style={{ backgroundColor: "transparent" }} defaultValue={spiceCount} disabled={approved} {...register("spiceCountInput")} />
+                <div className="CurrencyBlob">
+                    <img style={{ width: "1.5rem" }} src={ethIcon} />
+                    <div>SPICE</div>
+                </div>
             </div>
-            <div>Information Panel</div>
+            <div className="InfoBlock">
+                <div>1 ETH = 3333333 SPICE</div>
+            </div>
             <button className="SwapSpiceButton" type="submit">{msg}</button>
         </form>
     )

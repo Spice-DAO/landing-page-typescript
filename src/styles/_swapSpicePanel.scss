@@ -1,4 +1,4 @@
-.SwapSpicePanel{
+.SwapSpicePanel {
     display: flex;
     flex-direction: column;
     background-color: #FFFFFF;
@@ -12,19 +12,41 @@
     justify-content: space-between;
 }
 
-.InputBlock{
+.InputBlock {
     display: flex;
-    border: 1px solid red;
+    justify-content: space-between;
     background-color: #f1f2f3;
     border-radius: 0.5rem;
     padding-top: 1rem;
     padding-bottom: 1.5rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 
 }
 
-.SwapSpiceButton{
+.InfoBlock {
+    display: flex;
+    justify-content: space-between;
+}
+
+.CurrencyBlob {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;    
+    //align-items: center;
+    width: 27%;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.17);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    border-radius: 1rem;
+
+
+}
+
+
+.SwapSpiceButton {
     background-color: #ffe9f1;
     color: #e70066;
     padding: 0.75rem;
