@@ -25,9 +25,6 @@ type Props = {
 
 export default function Home({ connected, spiceFound, dolkorothFlag, duneFlag, tashkaFlag, redemptionFlag, setSpiceFound, setDolkorothFlag, setDuneFlag, setRedemptionFlag, setTashkaFlag }: Props) {
 
-
-
-
   function pagePicker() {
     if (dolkorothFlag) {
       return (<Dolkoroth />)

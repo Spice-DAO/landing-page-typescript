@@ -126,13 +126,16 @@ export default function SwapSpicePanel() {
 
     return (
         <form className="SwapSpicePanel" onSubmit={onSubmit} onChange={parseData}>
-            <div>Swap</div>
+            <div style={{fontWeight: "600"}}>Swap</div>
 
-            <input style={{ marginBottom: "1.5rem" }} disabled defaultValue={ethCount}  {...register("ethCountInput")} />
-            <input style={{ marginBottom: "1.5rem" }} defaultValue={spiceCount} disabled={approved} {...register("spiceCountInput")} />
-
+            <div className="InputBlock" >
+            <input disabled defaultValue={ethCount}  {...register("ethCountInput")} />
+            </div>
+            <div className="InputBlock">
+            <input style={{backgroundColor: "transparent"}} defaultValue={spiceCount} disabled={approved} {...register("spiceCountInput")} />
+            </div>
             <div>Information Panel</div>
-            <button type="submit">{msg}</button>
+            <button className="SwapSpiceButton" type="submit">{msg}</button>
         </form>
     )
 }

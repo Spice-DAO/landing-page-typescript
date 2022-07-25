@@ -1,12 +1,33 @@
 .SwapSpicePanel{
     display: flex;
     flex-direction: column;
-    border: 1px solid yellow;
     background-color: #FFFFFF;
     color: #000;
     height: 20rem;
     width: 30rem;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     border-radius: 2rem;
     justify-content: space-between;
+}
+
+.InputBlock{
+    display: flex;
+    border: 1px solid red;
+    background-color: #f1f2f3;
+    border-radius: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+}
+
+.SwapSpiceButton{
+    background-color: #ffe9f1;
+    color: #e70066;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
 }
