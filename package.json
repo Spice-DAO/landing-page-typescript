@@ -29,7 +29,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy-production": "react-scripts build && scp -r ./build/* root@67.205.129.95:/var/www/spicedao.xyz/html"
-
   },
   "eslintConfig": {
     "extends": [

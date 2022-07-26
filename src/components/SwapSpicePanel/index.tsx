@@ -3,6 +3,7 @@ import { useForm, SubmitHandler, FormProvider, } from "react-hook-form";
 import { useContractWrite, useAccount, useWaitForTransaction } from 'wagmi'
 import ERC20 from "../assets/ABI/ERC20ABI.json";
 import ethIcon from "../assets/images/eth.svg";
+import infoCircle from "../assets/images/info-circle.svg";
 
 
 type FormData = {
@@ -18,7 +19,7 @@ export default function SwapSpicePanel() {
 
     const { address, isConnected } = useAccount();
     const fetchEthPrice = fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd').then((response) => response.json())
-    .then((data) => setEthPrice(data.ethereum.usd));
+        .then((data) => setEthPrice(Number.parseFloat(data.ethereum.usd).toFixed(2)));
 
     const [ethCount, setEthCount] = useState(0.3);
     const [spiceCount, setSpiceCount] = useState(1000000);
@@ -26,12 +27,8 @@ export default function SwapSpicePanel() {
     const [approved, setApproved] = useState(false);
     const [approvalHash, setApprovalHash] = useState("");
     const [redeemHash, setRedeemHash] = useState("");
-    const [ethPrice, setEthPrice] = useState(0);
+    const [ethPrice, setEthPrice] = useState("");
 
-
-    function getEthPrice(eth: any){
-        return(eth);
-    }
 
 
     //Just use the token Address and call it's approve function and pass in the args
@@ -63,16 +60,7 @@ export default function SwapSpicePanel() {
     //Contract Address and ABI
     //Args: Amount (Just grab from the other txn)
 
-    // const redeemTxn = useContractWrite({
-    //     addressOrName: '0xecb504d39723b0be0e3a9aa33d646642d1051ee1',
-    //     contractInterface: wagmigotchiABI,
-    //     functionName: 'redeem',
-    //     args:[spiceCount],
-    //     onSettled(data, error) {
-    //       console.log('Settled', { data, error })
-    //     },
-    //   })
-
+    // const redeemTxn = useContractWrite({import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
     //   const redeemWait = useWaitForTransaction({
     //     hash: redeemHash,
@@ -134,24 +122,31 @@ export default function SwapSpicePanel() {
         <form className="SwapSpicePanel" onSubmit={onSubmit} onChange={parseData}>
             <div style={{ fontWeight: "600" }}>Swap</div>
 
-            <div className="InputBlock" >
-                <input disabled defaultValue={ethCount}  {...register("ethCountInput")} />
-                <div className="CurrencyBlob">
-                    <img style={{ width: "1.5rem" }} src={ethIcon} />
-                    <div>ETH</div>
+            <div className="InputBlock" style={{flexDirection: "column", paddingBottom: "0.5rem"}}>
+                <div className="InputRow">
+                    <input className="SwapInput"  disabled defaultValue={ethCount}  {...register("ethCountInput")} />
+                    <div className="CurrencyBlob">
+                        <img style={{ width: "1.5rem", marginRight: "0.5rem" }} src={ethIcon} />
+                        <div>ETH</div>
+                    </div>
                 </div>
+
+                <div className="TinyCurrency">${Number.parseFloat(String(ethCount * Number(ethPrice))).toFixed(2)}</div>
 
             </div>
             <div className="InputBlock">
-                <input style={{ backgroundColor: "transparent" }} defaultValue={spiceCount} disabled={approved} {...register("spiceCountInput")} />
+                <input className="SwapInput" defaultValue={spiceCount} disabled={approved} {...register("spiceCountInput")} />
                 <div className="CurrencyBlob">
-                    <img style={{ width: "1.5rem" }} src={ethIcon} />
+                    <img style={{ width: "1.5rem", marginRight: "0.5rem" }} src={ethIcon} />
                     <div>SPICE</div>
                 </div>
             </div>
             <div className="InfoBlock">
-                <div>1 ETH = 3333333 SPICE</div>
-                <div>{ethPrice}</div>
+                <div style={{fontSize: "smaller", display: "flex", alignItems: "center"}}>
+                <img style={{ width: ".9rem", marginRight: "0.3rem" }} src={infoCircle} />
+                    <span style={{ fontWeight: "500" }}>1 ETH = 3333333 SPICE</span> 
+                    (${ethPrice})
+                    </div>
             </div>
             <button className="SwapSpiceButton" type="submit">{msg}</button>
         </form>
