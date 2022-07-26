@@ -16,7 +16,9 @@ export default function SwapSpicePanel() {
     const { register, getValues, setValue, handleSubmit, formState: { errors } } = useForm<FormData>();
     const onSubmit = handleSubmit(data => submitData());
 
-    const { address, isConnected } = useAccount()
+    const { address, isConnected } = useAccount();
+    const fetchEthPrice = fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd').then((response) => response.json())
+    .then((data) => setEthPrice(data.ethereum.usd));
 
     const [ethCount, setEthCount] = useState(0.3);
     const [spiceCount, setSpiceCount] = useState(1000000);
@@ -24,9 +26,12 @@ export default function SwapSpicePanel() {
     const [approved, setApproved] = useState(false);
     const [approvalHash, setApprovalHash] = useState("");
     const [redeemHash, setRedeemHash] = useState("");
+    const [ethPrice, setEthPrice] = useState(0);
 
 
-
+    function getEthPrice(eth: any){
+        return(eth);
+    }
 
 
     //Just use the token Address and call it's approve function and pass in the args
@@ -146,6 +151,7 @@ export default function SwapSpicePanel() {
             </div>
             <div className="InfoBlock">
                 <div>1 ETH = 3333333 SPICE</div>
+                <div>{ethPrice}</div>
             </div>
             <button className="SwapSpiceButton" type="submit">{msg}</button>
         </form>
