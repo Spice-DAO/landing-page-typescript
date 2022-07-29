@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import "./styles/styles.css"
-import { WagmiConfig, createClient } from 'wagmi'
+import { WagmiConfig, createClient, configureChains, defaultChains } from 'wagmi'
 import { getDefaultProvider } from 'ethers'
 import Home from './pages/Home';
+
 
 
 const client = createClient({

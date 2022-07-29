@@ -19,6 +19,8 @@ type Props = {
 export default function HomeComponent({ setSpiceFound, setDolkorothFlag, setDuneFlag, setRedemptionFlag, setTashkaFlag }: Props) {
 
   const [spiceError, setSpiceError] = useState(false);
+  const { address, isConnected } = useAccount()
+
 
   const [duneReg, setDuneReg] = useState("Dune Bible")
   const [duneMsg, setDuneMsg] = useState(duneReg);
@@ -32,7 +34,6 @@ export default function HomeComponent({ setSpiceFound, setDolkorothFlag, setDune
   const [redemptionReg, setRedemptionReg] = useState("Redemptions")
   const [redemptionMsg, setRedemptionMsg] = useState(redemptionReg);
 
-  const { address, isConnected } = useAccount()
 
   const { connect } = useConnect({
     connector: new InjectedConnector(),
@@ -129,11 +130,22 @@ export default function HomeComponent({ setSpiceFound, setDolkorothFlag, setDune
         <a href="https://forum.spicedao.xyz/">Forum</a>
         <a href="https://snapshot.org/#/dunedao.eth">Governance</a>
 
+
+          {/* 
+          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            IMPORTANT  CHANGE ONCLICK BACK TO
+                      onClick={() => handleFlag(setRedemptionFlag)}
+
+
+          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+          */}
+
         {isConnected ? (
           <a
             onMouseEnter={() => setRedemptionMsg(getAltMsg("Redeem"))}
             onMouseLeave={() => setRedemptionMsg(redemptionReg)}
-            onClick={() => handleFlag(setRedemptionFlag)}
+            onClick={() => setRedemptionFlag(true)}
           >{redemptionMsg}</a>
         ) : (<a
           onMouseEnter={() => setRedemptionMsg(getAltMsg("Redeem"))}

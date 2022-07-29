@@ -43,11 +43,11 @@ export default function Home({ connected, spiceFound, dolkorothFlag, duneFlag, t
     }
     else {
       return (<HomeComponent
-      setSpiceFound={setSpiceFound}
-      setDolkorothFlag={setDolkorothFlag}
-      setDuneFlag={setDuneFlag}
-      setTashkaFlag={setTashkaFlag}
-      setRedemptionFlag={setRedemptionFlag}/>)
+        setSpiceFound={setSpiceFound}
+        setDolkorothFlag={setDolkorothFlag}
+        setDuneFlag={setDuneFlag}
+        setTashkaFlag={setTashkaFlag}
+        setRedemptionFlag={setRedemptionFlag} />)
     }
   }
 
