@@ -19,7 +19,7 @@ export default function SwapSpicePanel() {
     const { register, getValues, setValue, handleSubmit, formState: { errors } } = useForm<FormData>();
     const onSubmit = handleSubmit(data => submitData());
 
-    const redeemerAddress = getAddress("0x2Fe7A4aa02DE955204aCF21FaD4Ad1567Cf1C47C");
+    const redeemerAddress = getAddress("0xecfCD61226C8e0B3Fd4E2Cb42021B260aC985DC2");
 
     const { address, isConnected } = useAccount();
     const fetchEthPrice = fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd').then((response) => response.json())
@@ -30,6 +30,7 @@ export default function SwapSpicePanel() {
     const spiceToWei = parseEther(String(spiceCount));
     const [msg, setMsg] = useState("Approve");
     const [approved, setApproved] = useState(false);
+    const [burned, setBurned] = useState(false);
     const [approvalHash, setApprovalHash] = useState("");
     const [redeemHash, setRedeemHash] = useState("");
     const [ethPrice, setEthPrice] = useState("");
@@ -50,18 +51,40 @@ export default function SwapSpicePanel() {
         args: [redeemerAddress, spiceToWei],
         onSettled(data, error) {
             console.log('Settled', { data, error })
+            setApproved(true);
+            console.log("Approved");
         },
     })
 
 
-    const contractWrite = useContractWrite({
+    const burnTxn = useContractWrite({
         mode: 'recklesslyUnprepared',
-        addressOrName: getAddress('0xae2A85329eeAd962F1D879aB0CD0337deb11C008'),
+        addressOrName: getAddress('0xecfCD61226C8e0B3Fd4E2Cb42021B260aC985DC2'),
         contractInterface: RedemptionABI,
         functionName: 'burn',
         args: [spiceToWei],
+        onSettled(data, error) {
+            console.log('Settled', { data, error })
+            setBurned(true);
+            console.log("Burned!")
+          },
       })
 
+
+      const redeemTxn = useContractWrite({
+        mode: 'recklesslyUnprepared',
+        addressOrName: getAddress('0xecfCD61226C8e0B3Fd4E2Cb42021B260aC985DC2'),
+        contractInterface: RedemptionABI,
+        functionName: 'redeem',
+        onSettled(data, error) {
+            console.log('Settled', { data, error })
+            
+            //setBurned(true);
+            //console.log("Burned!")
+          },
+      })
+
+      
 
     // const burnTxn = usePrepareContractWrite({
     //     addressOrName: getAddress('0xae2A85329eeAd962F1D879aB0CD0337deb11C008'),
@@ -76,21 +99,21 @@ export default function SwapSpicePanel() {
     // })
 
 
-    const redeemTxn = usePrepareContractWrite({
-        addressOrName: getAddress('0x2Fe7A4aa02DE955204aCF21FaD4Ad1567Cf1C47C'),
-        chainId: 42,
-        contractInterface: RedemptionABI,
-        functionName: 'redeem',
-        onSettled(data, error) {
-            console.log('Settled', { data, error })
-        },
-        //args: [spiceToWei],
-    })
+    // const redeemTxn = usePrepareContractWrite({
+    //     addressOrName: getAddress('0x2Fe7A4aa02DE955204aCF21FaD4Ad1567Cf1C47C'),
+    //     chainId: 42,
+    //     contractInterface: RedemptionABI,
+    //     functionName: 'redeem',
+    //     onSettled(data, error) {
+    //         console.log('Settled', { data, error })
+    //     },
+    //     //args: [spiceToWei],
+    // })
 
 
 
     const approve = useContractWrite(approveTxn.config);
-    const redeem = useContractWrite(redeemTxn.config);
+    //const redeem = useContractWrite(redeemTxn.config);
     //const burn = useContractWrite(burnTxn.config);
 
     //   const redeemTxn = useContractWrite({
@@ -164,6 +187,19 @@ export default function SwapSpicePanel() {
             }
 
         } else if (approved) {
+            setMsg("Burn");
+            if (String(spiceCount).length > 8) {
+                setMsg("Too Much Spice!")
+            }
+            if (spiceCount == 0) {
+                setMsg("Must Burn More Than 0 Spice")
+            }
+            else {
+                setMsg("Sending Transaction")
+                burnTxn.write?.();
+
+            }
+        } else if (approved && burned) {
             setMsg("Redeem");
             if (String(spiceCount).length > 8) {
                 setMsg("Too Much Spice!")
@@ -173,7 +209,7 @@ export default function SwapSpicePanel() {
             }
             else {
                 setMsg("Sending Transaction")
-                redeem.write?.();
+                redeemTxn.write?.();
 
             }
         } else {
@@ -190,7 +226,7 @@ export default function SwapSpicePanel() {
 
 
             <div className="InputBlock">
-                <input className="SwapInput" defaultValue={spiceCount} disabled={approved} {...register("spiceCountInput")} />
+                <input className="SwapInput" defaultValue={spiceCount} {...register("spiceCountInput")} />
                 <div className="CurrencyBlob">
                     <img style={{ width: "1.5rem", marginRight: "0.5rem" }} src={ethIcon} />
                     <div>SPICE</div>
@@ -215,7 +251,10 @@ export default function SwapSpicePanel() {
                     (${ethPrice})
                 </div>
             </div>
-            <button className="SwapSpiceButton" type="submit">{msg}</button>
+            {/* <button className="SwapSpiceButton" type="submit">{msg}</button> */}
+            <button onClick={() => approve.write?.()}>Approve</button>
+            <button onClick={() => burnTxn.write?.()}>Burn</button>
+            <button onClick={() => redeemTxn.write?.()}>Redeem</button>
         </form>
     )
 }
